@@ -154,11 +154,37 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
+      //iterate through diagonal 
+      //check if this diagonal has multiple queens
+      var foundQueen = false;
+      var board = this.rows();
+      var n = board.length;
+
+      for(var row = 0; row < n; row++){
+        var col = majorDiagonalColumnIndexAtFirstRow + row;
+        //verify this cell is within the bounds of the board
+        if(this._isInBounds(row, col)){
+          if(board[row][col] && foundQueen){
+            return true;
+          }else if(board[row][col]){
+            foundQueen = true;
+          }
+        }
+
+      }
+
       return false; // fixme
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
+      // Check every major diagnoal using hasMajorDiagonalConflictAt
+      // Returns true if any conflicts, else return false
+      var board = this.rows();
+      var n = board.length;
+      for (var col = -1*(n-1); col < n; col++) {
+        if (this.hasMajorDiagonalConflictAt(col)) { return true; }
+      }
       return false; // fixme
     },
 
