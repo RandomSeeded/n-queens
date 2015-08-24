@@ -84,13 +84,13 @@
       var board = this.rows(); // 2-d array
 
       //iterate over the row
-      for(var i =0; i < board.length; i++){
+      for(var row =0; row < board.length; row++){
         //if current index has queen and we found queen previously
-        if(board[rowIndex][i] && foundQueen){
+        if(board[rowIndex][row] && foundQueen){
           return true;
         }
         //else if current index has queen
-        else if (board[rowIndex][i]){
+        else if (board[rowIndex][row]){
           foundQueen = true;
         }
       }
@@ -107,7 +107,7 @@
       for (var row = 0; row < n; row++) {
         if (this.hasRowConflictAt(row)) { return true; }
       }
-      return false; // fixme
+      return false;
     },
 
 
@@ -117,11 +117,33 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
+      //iterate through each row and check at colIndex
+      //if we find two queens in a single column we have a conflict
+      var foundQueen = false;
+      var board = this.rows();
+
+      for(var row = 0; row < board.length; row++){
+
+        if(board[row][colIndex] && foundQueen){
+          return true;
+        }else if(board[row][colIndex]){
+          foundQueen = true;
+        }
+
+      }
+
       return false; // fixme
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
+      // Check every column using hasColConflictAt
+      // Returns true if any conflicts, else false
+      var board = this.rows();
+      var n = board.length;
+      for (var col = 0; col < n; col++) {
+        if (this.hasColConflictAt(col)) { return true; }
+      }
       return false; // fixme
     },
 
