@@ -100,6 +100,13 @@
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
+      // Check every row using hasRowConflictAt
+      // Return true if any row has a conflict, else false
+      var board = this.rows();
+      var n = board.length;
+      for (var row = 0; row < n; row++) {
+        if (this.hasRowConflictAt(row)) { return true; }
+      }
       return false; // fixme
     },
 
