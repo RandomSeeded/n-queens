@@ -79,7 +79,23 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+      //variable to hold first found queen
+      var foundQueen = false;
+      var board = this.rows(); // 2-d array
+
+      //iterate over the row
+      for(var i =0; i < board.length; i++){
+        //if current index has queen and we found queen previously
+        if(board[rowIndex][i] && foundQueen){
+          return true;
+        }
+        //else if current index has queen
+        else if (board[rowIndex][i]){
+          foundQueen = true;
+        }
+      }
+
+      return false;
     },
 
     // test if any rows on this board contain conflicts
