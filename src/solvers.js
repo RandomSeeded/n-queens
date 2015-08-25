@@ -59,7 +59,7 @@ window.countNRooksSolutions = function(n) {
 
   var solutionCount = 0;
 
-  var addPiece = function(row){
+  /*var addPiece = function(row){
     //if we are trying to add more pieces then there are rows we know we have a solution
     if(row >= n){ 
       solutionCount++;
@@ -75,7 +75,14 @@ window.countNRooksSolutions = function(n) {
       }
       board.togglePiece(row,col);
     }
+  }*/
+
+  // For purposes of making our tests not take forever
+  var factSol = 1;
+  for (var i = 2; i <= n; i++) {
+    factSol = factSol*i;
   }
+  return factSol;
 
   addPiece(0);
 
