@@ -189,9 +189,6 @@ window.bitwiseCountNQueens = function(n){
       // Remove that position as an 'empty' space in poss
       poss = poss - bit;
 
-      var newLD = (ld|bit)>>1;
-      var newRD = (rd|bit)<<1;
-      var newCols = (cols|bit);
       addPiece((ld|bit)>>1, (cols|bit),(rd|bit)<<1);
     }
   }
