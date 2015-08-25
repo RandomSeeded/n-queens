@@ -162,3 +162,40 @@ window.countNQueensSolutions = function(n) {
   console.log('Number of solutions for ' + n + ' queens:', solutionCount);
   return solutionCount;
 };
+
+window.bitwiseCountNQueens = function(n){
+
+  // For counting num solutions
+  var solutions = 0;
+
+  // Create a number with all 1s, representing the 'done' state of cols
+  var done = Math.pow(2,n)-1;
+
+  var addPiece = function(ld, cols, rd) {
+    // If all columns are filled, we have reached successful soln
+    if (cols === done) {
+      solutions++;
+      return;
+    }
+
+    // Find all positions we can place a queen into
+    var poss = ~(ld | cols | rd);
+
+    // While there's anywhere we can add a queen (otherwise will exit)
+    while (poss & done) {
+      // Pick a position to place the queen into (from right)
+      var bit = poss & -poss;
+
+      // Remove that position as an 'empty' space in poss
+      poss = poss - bit;
+
+      var newLD = (ld|bit)>>1;
+      var newRD = (rd|bit)<<1;
+      var newCols = (cols|bit);
+      addPiece((ld|bit)>>1, (cols|bit),(rd|bit)<<1);
+    }
+  }
+
+  addPiece(0,0,0);
+  return solutions;
+}
